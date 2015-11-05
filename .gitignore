@@ -2,3 +2,4 @@
 client/jspm_packages
 node_modules
 public
+.DS_Store
