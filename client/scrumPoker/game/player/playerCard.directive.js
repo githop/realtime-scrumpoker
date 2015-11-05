@@ -33,7 +33,9 @@ let playerCard = function() {
         <div class="flip-container" ng-class="{ flip: ctrl.myEstimate._showEstimate }">
           <div class="flipper">
             <div class="front player-card md-whiteframe-4dp" ng-style="ctrl.svgCard">
-
+             <div class="md-whiteframe-4dp text-center" style="background-color: white;">
+              <h3>{{ctrl.player._name}}</h3>
+             </div>
             </div>
             <div class="back md-whiteframe-4dp"">
               <h3>{{ctrl.player._name}}</h3>

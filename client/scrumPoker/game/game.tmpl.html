@@ -1,9 +1,8 @@
 <div layout="column" layout-align="center center">
 
 
-  <h1>welcome to the game!</h1>
-
-  <current-topic-card class="current-topic-card"
+  <current-topic-card ng-if="Game.game.topics.length"
+                      class="current-topic-card"
                       topics="Game.game.topics"></current-topic-card>
 
   <div ng-if="Game.game.players.length" layout="row" layout-align="start center">
@@ -28,9 +27,10 @@
   </div>
 
   <div layout="row" ng-if="Game.game.players.length && Game.game.topics.length >= 1">
-    <md-button class="md-raised md-primary" ui-sref="poker.game.join">Join Game!</md-button>
+    <md-button class="md-raised md-primary w-font" ui-sref="poker.game.join">Join Game</md-button>
     <md-button ng-if="!Game.addingTopic" class="md-raised md-accent" ng-click="Game.showAddTopic(true)">New Topic</md-button>
     <md-button ng-if="Game.addingTopic" class="md-raised md-accent" ng-click="Game.showAddTopic(false)">Cancel</md-button>
+    <md-button class="md-raised md-warn w-font" ng-click="Game.reset()">reset game</md-button>
   </div>
 
 </div>

@@ -55,4 +55,10 @@ body, .app-body, .app-shell {
 .selected-tile {
   background-color: #F43A42; }
 
+.w-font {
+  color: white !important; }
+
+.text-center {
+  text-align: center; }
+
 /*# sourceMappingURL=style.css.map */

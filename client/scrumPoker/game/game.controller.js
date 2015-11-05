@@ -3,10 +3,12 @@
  */
 
 class Game {
-  constructor(Game) {
+  constructor($mdDialog, $window, Game) {
     this.hello = 'welcome to the game!';
     this.game = Game;
     this.addingTopic = false;
+    this.$mdDialog = $mdDialog;
+    this.$window = $window;
   }
 
   addTopic(topic) {
@@ -18,8 +20,23 @@ class Game {
     this.addingTopic = bool;
   }
 
+  reset() {
+    var ctrl = this;
+    let confirm = this.$mdDialog.confirm()
+      .title('Reset Game')
+      .content('Warning - Will erase all topics, players, estimates etc...')
+      .ok('RESET')
+      .cancel('CANCEL');
+
+    this.$mdDialog.show(confirm).then(() => {
+      ctrl.game.resetGame();
+      this.$window.location.href = '/';
+    }, () =>{})
+
+  }
+
 }
 
-Game.$inject = ['Game'];
+Game.$inject = ['$mdDialog', '$window', 'Game'];
 
 export default Game;

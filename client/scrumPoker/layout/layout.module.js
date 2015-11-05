@@ -10,6 +10,7 @@ import body from './body.html!text';
 import landing from './landing.tmpl.html!text';
 import styles from './style.css!css';
 import NavCtrl from './nav.controller';
+import LandingCtrl from'./landing.controller';
 import ThemeModule from './md-theme.module';
 
 let layoutModule = angular.module('scrumPoker.layout', [
@@ -35,10 +36,12 @@ let layoutModule = angular.module('scrumPoker.layout', [
       })
       .state('poker.landing', {
         url: '/',
-        template: landing
+        template: landing,
+        controller: 'LandingCtrl as Landing'
       });
     $urlRouterProvider.otherwise('/');
   })
+  .controller('LandingCtrl', LandingCtrl)
   .controller('NavCtrl', NavCtrl);
 
 export default layoutModule;

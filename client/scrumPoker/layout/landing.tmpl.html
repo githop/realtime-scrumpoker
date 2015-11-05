@@ -1,12 +1,30 @@
 <div layout="column" layout-align="center center">
     <md-card class="landing-card">
       <md-toolbar class="md-primary">
-        <div class="md-toolbar-tools">
+        <div class="md-toolbar-tools w-font">
           <h1>Realtime ScrumPoker!</h1>
+          <span flex></span>
+          <md-button md-theme="scrumPoker" class="md-raised md-accent" ui-sref="poker.game">game lobby</md-button>
         </div>
       </md-toolbar>
       <md-card-content>
-        <p>This is a side project I made to get more familar with a few technologies, namely websockets.</p>
+       <p>An online multiplayer real-time version of <a href="https://en.wikipedia.org/wiki/Planning_poker" target="_blank">Scrum poker</a>!
+         Players use their mobile device to make estimates and reveal their cards to other players.</p>
+        <md-divider></md-divider>
+        <h3>How to Play</h3>
+
+        <md-content>
+        <md-card ng-repeat="step in Landing.steps">
+          <md-card-content>
+            <div layout="row" layout-align="center center">
+              <div flex="5"><h1>{{$index + 1}}</h1></div>
+              <div flex>{{step.step}}</div>
+            </div>
+
+          </md-card-content>
+        </md-card>
+        </md-content>
+
       </md-card-content>
       <md-button md-theme="scrumPoker" class="md-raised md-accent" ui-sref="poker.game">game lobby</md-button>
     </md-card>

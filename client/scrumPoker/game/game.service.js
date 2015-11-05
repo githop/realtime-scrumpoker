@@ -78,6 +78,10 @@ let GameService = function(btSocket) {
       );
     };
 
+    this.resetGame = function() {
+      btSocket.emit('reset');
+    }
+
   }
 
   return new Game();

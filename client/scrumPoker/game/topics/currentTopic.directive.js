@@ -16,28 +16,26 @@ let currentTopic = function() {
   return {
     restrict: 'EA',
     template: `
-    <div layout="row" layout-align="center" ng-if="ctrl.topics.length">
-    <div ng-if="ctrl.topics.length > 1">
-      <md-button ng-click="ctrl.game.prevTopic()" class="md-fab"> < </md-button>
-    </div>
-    <div flex="80">
+
+    <div>
       <md-card>
         <md-toolbar class="md-warn">
-          <div class="md-toolbar-tools">
-            <h1>{{ctrl.topics[ctrl.game.currentTopic]._title}}</h1>
+          <div class="md-toolbar-tools w-font">
+            <h3>{{ctrl.topics[ctrl.game.currentTopic]._title}}</h3>
             <span flex></span>
-            <span>{{ctrl.game.currentTopic + 1}} of {{ctrl.topics.length}}</span>
+            <md-button class="md-fab md-primary md-fab-top-right w-font">{{ctrl.game.currentTopic + 1}}/{{ctrl.topics.length}}</md-button>
           </div>
         </md-toolbar>
         <md-card-content>
-          <p>{{ctrl.game.topics[ctrl.game.currentTopic]._description}}</p>
+         <md-subheader class="md-primary">Description</md-subheader>
+          <p class="text-center">{{ctrl.game.topics[ctrl.game.currentTopic]._description}}</p>
         </md-card-content>
+         <div ng-if="ctrl.topics.length > 1" layout="row">
+          <md-button flex ng-click="ctrl.game.prevTopic()">Previous Topic</md-button>
+          <md-button flex ng-click="ctrl.game.nextTopic()">Next Topic</md-button>
+        </div>
       </md-card>
-    </div>
-    <div ng-if="ctrl.topics.length > 1">
-    <md-button ng-click="ctrl.game.nextTopic()" class="md-fab"> > </md-button>
-    </div>
-  </div>`,
+    </div>`,
     scope: {},
     bindToController: {
       topics: '='

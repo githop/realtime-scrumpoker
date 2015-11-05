@@ -46,7 +46,6 @@ io.on('connection', function(client) {
 
   client.on('getPlayers', function() {
     var players = g.getPlayers();
-    console.log('players', players);
     client.emit('players', players);
   });
 
@@ -54,13 +53,11 @@ io.on('connection', function(client) {
     var t = new Topic(topic.title, topic.description);
     g.addTopic(t);
     var topics = g.getTopics();
-    console.log('ss topics', topics);
     io.emit('topics', topics);
   });
 
   client.on('getTopics', function() {
     var topics = g.getTopics();
-    console.log('ss topics', topics);
     client.emit('topics', topics);
   });
 
@@ -88,12 +85,18 @@ io.on('connection', function(client) {
   client.on('showEstimate', function(data) {
     var e = g.getEstimate(data.estId);
     e.showEstimate();
-    console.log('ss est', e);
     io.emit('estimates', g.getEstimates());
   });
 
   client.on('getEstimates', function() {
     client.emit('estimates', g.getEstimates());
+  });
+
+  client.on('reset', function() {
+    g.reset();
+    io.emit('players');
+    io.emit('topics');
+    io.emit('estimates');
   });
 
   client.on('error', function(e) {console.log(e)});

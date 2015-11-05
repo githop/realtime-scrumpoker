@@ -22,7 +22,9 @@ var Game = function() {
     }
   }
 
-  function getEstimates() { return { estimates: _estimates }; }
+  function getEstimates() {
+    return {estimates: _estimates};
+  }
 
   function addTopic(topic) {
     topic.id = nextTopicId;
@@ -37,7 +39,9 @@ var Game = function() {
     }
   }
 
-  function getTopics() { return { topics: _topics }; }
+  function getTopics() {
+    return {topics: _topics};
+  }
 
   function nextTopic() {
     if (_currentTopic < nextTopicId - 1) {
@@ -68,7 +72,19 @@ var Game = function() {
     return player;
   }
 
-  function getPlayers() { return _players; }
+  function getPlayers() {
+    return _players;
+  }
+
+  function reset() {
+    _topics = [];
+    _players = [];
+    _estimates = [];
+    nextId = 0;
+    nextTopicId = 0;
+    nextEstimateId = 0;
+    _currentTopic = 0;
+  }
 
   return {
     addEstimate: addEstimate,
@@ -82,7 +98,8 @@ var Game = function() {
     prevTopic: prevTopic,
     addPlayer: addPlayer,
     getPlayer: getPlayer,
-    getPlayers: getPlayers
+    getPlayers: getPlayers,
+    reset: reset
   }
 };
 

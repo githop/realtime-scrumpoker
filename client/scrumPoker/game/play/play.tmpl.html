@@ -4,7 +4,8 @@
   <current-topic-card class="current-topic-card"
                       topics="Play.game.topics"></current-topic-card>
 
-<h1>welcome {{Play.game.players[Play.playerId]._name}}</h1>
+<h2>welcome {{Play.game.players[Play.playerId]._name}}</h2>
+  <a ui-sref="poker.game">back</a>
 
 
   <md-card>
@@ -19,11 +20,11 @@
       </md-grid-list>
     </md-card-content>
     <md-card-footer>
-        <md-button class="md-raised md-warn"
+        <md-button class="md-raised md-warn w-font"
                    ng-class="{'md-primary': Play.selectedEst >= 0, 'md-warn': Play.selectedEst == undefined}"
                    ng-click="Play.estimate(Play.selectedEst, Play.game.currentTopic, Play.playerId)">Send Estimate</md-button>
 
-        <md-button class="md-raised md-warn" ng-click="Play.showEstimate(Play.playerId, Play.game.currentTopic)">Flip Card</md-button>
+        <md-button class="md-raised md-warn w-font" ng-click="Play.showEstimate(Play.playerId, Play.game.currentTopic)">Flip Card</md-button>
     </md-card-footer>
 
   </md-card>
