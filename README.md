@@ -1,6 +1,7 @@
 #realtime-scrumpoker
 An online multiplayer real-time version of [Scrum poker](https://en.wikipedia.org/wiki/Planning_poker)!
 Players use their mobile device to make estimates and reveal their cards to other players.
+See it online at [scrumpoker.githop.com](http://scrumpoker.githop.com/)
 ###How to play
 1. Begin game by entering game lobby and clicking 'Join Game' to create a player.
    Current Players are represented by cards and can be seen in the nav.

@@ -94,9 +94,6 @@ io.on('connection', function(client) {
 
   client.on('reset', function() {
     g.reset();
-    io.emit('players');
-    io.emit('topics');
-    io.emit('estimates');
   });
 
   client.on('error', function(e) {console.log(e)});
