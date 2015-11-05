@@ -1,0 +1,21 @@
+<div layout="column">
+  <form name="estimateForm" ng-submit="Game.addTopic(topic)">
+    <div layout="column">
+      <md-button class="md-primary md-raised">add topic</md-button>
+      <md-input-container>
+        <label>topic title </label>
+        <input type="text" ng-model="topic.title" required/>
+      </md-input-container>
+
+      <md-input-container>
+        <label>topic description</label>
+        <textarea id="" cols="30" rows="10" ng-model="topic.description" required></textarea>
+      </md-input-container>
+    </div>
+  </form>
+
+</div>
+
+
+
+

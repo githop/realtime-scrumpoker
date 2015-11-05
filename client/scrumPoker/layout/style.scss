@@ -1,0 +1,88 @@
+
+$sp-blue: #40709E;
+$sp-red: #F43A42;
+$sp-camo: #CBC97E;
+$sp-clay: #888777;
+$sp-green: #7CA754;
+
+$primary-color-dark:   #455A64;
+$primary-color:        #607D8B;
+$primary-color-light:  #CFD8DC;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #4CAF50;
+$primary-text-color:   #212121;
+$secondary-text-color: #727272;
+$divider-color:        #B6B6B6;
+
+body, .app-body, .app-shell {
+  background-color: lighten($sp-clay, 40%) !important;
+}
+
+.app-nav {
+  color: white;
+}
+
+.landing-card {
+  width: 75%;
+}
+
+.current-topic-card {
+  width: 75%;
+}
+
+.player-card {
+  width: 103px;
+  height: 150px;
+  background: 103px 150px;
+}
+
+.flip-container {
+  perspective: 1000;
+}
+
+
+.flip-container:hover .flipper, .flip-container.hover .flipper, .flip-container.flip .flipper {
+  transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+  width: 103px;
+  height: 150px;
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+.front, .back {
+  background-color: white;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+.back {
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.tile-bg {
+  color: white;
+  background-color: $accent-color;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.selected-tile {
+  background-color: $sp-red;
+}
