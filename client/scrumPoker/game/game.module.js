@@ -28,7 +28,12 @@ let gameModule = angular.module('scrumPoker.game', [
         views: {
           'body@poker': {
             template,
-            controller: 'GameCtrl as Game'
+            controller: 'GameCtrl as Game',
+            resolve: {
+              gameState: function(Game) {
+                return Game;
+              }
+            }
           },
           'addTopic@poker.game': { template: addTopic }
         }

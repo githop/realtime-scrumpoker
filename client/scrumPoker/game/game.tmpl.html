@@ -5,10 +5,9 @@
                       class="current-topic-card"
                       topics="Game.game.topics"></current-topic-card>
 
-  <div ng-if="Game.game.players.length" layout="row" layout-align="start center">
-    <div ng-repeat="player in Game.game.players track by player._id">
-      <player-card player="player" pic="{{$index}}"></player-card>
-    </div>
+  <div ng-if="Game.game.players.length">
+
+      <player-card game-state="Game.game"></player-card>
   </div>
 
   <div layout="column" layout-align="center center" ng-if="Game.game.topics.length === 0 && Game.game.players.length === 0">

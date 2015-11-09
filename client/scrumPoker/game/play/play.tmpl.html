@@ -1,31 +1,45 @@
-
 <div layout="column" layout-align="center center">
 
-  <current-topic-card class="current-topic-card"
-                      topics="Play.game.topics"></current-topic-card>
+  <div ng-if="!Play.game.topics.length">
+    <h3>Topics must be made before estimates can happen.</h3>
+    <md-button ui-sref="poker.game">back</md-button>
+  </div>
 
-<h2>welcome {{Play.game.players[Play.playerId]._name}}</h2>
-  <a ui-sref="poker.game">back</a>
+
+  <div ng-if="Play.game.topics.length">
+
+    <current-topic-card class="current-topic-card"
+                        topics="Play.game.topics"></current-topic-card>
+
+    <!--<div layout="row" layout-align="space-between center">-->
+    <!--<div><h2>Welcome {{Play.game.players[Play.playerId]._name}}</h2></div>-->
+    <!--<div><md-button ui-sref="poker.game">back</md-button></div>-->
+    <!--</div>-->
 
 
-  <md-card>
-    <md-card-content>
-      <md-grid-list md-cols="3" md-gutter="1em" md-row-height="4:3">
-        <md-grid-tile ng-repeat="tile in Play.tileValues"
-                      class="tile-bg"
-                      ng-class="{'selected-tile': Play.selectedEst == tile}"
-                      ng-click="Play.selectEstimate(tile)">
-          <h2>{{tile}}</h2>
-        </md-grid-tile>
-      </md-grid-list>
-    </md-card-content>
-    <md-card-footer>
-        <md-button class="md-raised md-warn w-font"
-                   ng-class="{'md-primary': Play.selectedEst >= 0, 'md-warn': Play.selectedEst == undefined}"
-                   ng-click="Play.estimate(Play.selectedEst, Play.game.currentTopic, Play.playerId)">Send Estimate</md-button>
+    <md-card>
+      <md-card-content>
+        <md-grid-list md-cols="3" md-gutter="1em" md-row-height="4:3">
+          <md-grid-tile ng-repeat="tile in Play.tileValues"
+                        class="tile-bg"
+                        ng-class="{'selected-tile': Play.latestEst == tile}"
+                        ng-click="Play.estimate(tile, Play.game.currentTopic, Play.playerId)">
+            <h2>{{tile}}</h2>
+          </md-grid-tile>
+        </md-grid-list>
+      </md-card-content>
 
-        <md-button class="md-raised md-warn w-font" ng-click="Play.showEstimate(Play.playerId, Play.game.currentTopic)">Flip Card</md-button>
-    </md-card-footer>
+      <div layout="row">
+        <md-button flex class="md-raised md-primary md-hue-2 w-font"
+                   ui-sref="poker.game">
+          back
+        </md-button>
+        <md-button flex class="md-raised md-warn w-font"
+                   ng-click="Play.showEstimate(Play.playerId, Play.game.currentTopic)">
+          Flip Card
+        </md-button>
+      </div>
 
-  </md-card>
+    </md-card>
+  </div>
 </div>

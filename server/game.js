@@ -3,23 +3,21 @@ var _ = require('lodash');
 var Game = function() {
   var _topics = [];
   var _players = [];
-  var _estimates = [];
+  var _estimates = {};
+  var _nest = {};
   var nextId = 0;
   var nextTopicId = 0;
-  var nextEstimateId = 0;
   var _currentTopic = 0;
 
   function addEstimate(e) {
-    e.id = nextEstimateId;
-    _estimates.push(e);
-    nextEstimateId++;
+    var pId = e.playerId;
+    var tId = e.topicId;
+    _nest[tId] = e;
+    _estimates[pId] = _nest;
   }
 
-  function getEstimate(id) {
-    var estimate = _.find(_estimates, {_id: id});
-    if (estimate) {
-      return estimate;
-    }
+  function getEstimate(pid, tid) {
+    return _estimates[pid][tid];
   }
 
   function getEstimates() {

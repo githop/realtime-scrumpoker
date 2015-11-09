@@ -3,31 +3,43 @@
  */
 import _ from 'lodash';
 
-let GameService = function(btSocket) {
+let GameService = function($window, $q, btSocket) {
 
   function Game() {
     var self = this;
     this.players = [];
     this.topics = [];
-    this.estimates = [];
+    this.estimates = {};
     this.currentTopic = 0;
 
     this.setPlayers = function(data) {
       self.players = data;
     };
 
+    this.getPlayers = function() {
+      var dfd = $q.defer();
+
+      dfd.resolve(this.players);
+
+      return dfd.promise;
+    }.bind(this);
+
     this.setTopics = function(data) {
-      console.log('newtopics', data);
       self.topics = data.topics;
     };
 
     this.setEstimates = function(data) {
-      console.log('estimates', data);
+      console.log('estimates from ss', data);
       self.estimates = data.estimates;
     };
 
+    this.getEstimates = function() {
+      var dfd = $q.defer();
+      dfd.resolve(this.estimates);
+      return dfd.promise;
+    }.bind(this);
+
     this.setNextTopic = function(currentTopic) {
-      console.log('nextTopic from ss', currentTopic);
       self.currentTopic = currentTopic;
     };
 
@@ -36,8 +48,11 @@ let GameService = function(btSocket) {
     };
 
     this.setCurrentTopic = function(currentTopic) {
-      console.log('curTop', currentTopic);
       self.currentTopic = currentTopic;
+    };
+
+    this.endGame = function() {
+      $window.location.href = '/';
     };
 
     btSocket.on('players', self.setPlayers);
@@ -46,6 +61,7 @@ let GameService = function(btSocket) {
     btSocket.on('topicAfter', self.setNextTopic);
     btSocket.on('topicBefore', self.setPrevTopic);
     btSocket.on('currentTopic', self.setCurrentTopic);
+    btSocket.on('gameOver', self.endGame);
 
     this.addPlayer = function(name) {
       btSocket.emit('addPlayer', name);
@@ -67,16 +83,18 @@ let GameService = function(btSocket) {
       btSocket.emit('doEstimate', {val, topicId, playerId})
     };
 
-    this.showEstimate = function(estId) {
-      btSocket.emit('showEstimate', {estId});
+    this.showEstimate = function(playerId, topicId) {
+      btSocket.emit('showEstimate', {playerId, topicId});
     };
 
-    this.playerLastEstimate = function(playerId, topicId) {
-      var ctrl = this;
-      return _.last(
-        _.where(ctrl.estimates, {_playerId: parseInt(playerId,10), _topicId: topicId })
-      );
-    };
+    this.playerLastEstimate = function(pId, tId) {
+      //console.log('estimates', this.estimates[pId][tId]);
+      if (this.estimates[pId]) {
+        if (this.estimates[pId][tId]) {
+          return this.estimates[pId][tId];
+        }
+      }
+    }.bind(this);
 
     this.resetGame = function() {
       btSocket.emit('reset');
@@ -88,6 +106,6 @@ let GameService = function(btSocket) {
 
 };
 
-GameService.$inject = ['btSocket'];
+GameService.$inject = ['$window', '$q', 'btSocket'];
 
 export default GameService;

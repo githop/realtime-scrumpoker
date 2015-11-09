@@ -1,11 +1,17 @@
 /**
  * Created by githop on 10/28/15.
  */
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var path = require('path');
+
+//var server = require('http').createServer(app);
+import http from 'http';
+import * as socket from 'socket.io';
+import path from 'path';
+
+//var io = require('socket.io')(server);
+
+const server = http.createServer(app);
+const io = socket(server);
+
 
 var Player = require('./player.js');
 var Topic = require('./topic.js');
@@ -83,7 +89,7 @@ io.on('connection', function(client) {
   });
 
   client.on('showEstimate', function(data) {
-    var e = g.getEstimate(data.estId);
+    var e = g.getEstimate(data.playerId, data.topicId);
     e.showEstimate();
     io.emit('estimates', g.getEstimates());
   });
@@ -94,6 +100,7 @@ io.on('connection', function(client) {
 
   client.on('reset', function() {
     g.reset();
+    io.emit('gameOver');
   });
 
   client.on('error', function(e) {console.log(e)});

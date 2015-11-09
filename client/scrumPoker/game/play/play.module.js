@@ -14,11 +14,16 @@ let playModule = angular.module('scrumPoker.game.play', [
     "use strict";
     $stateProvider
       .state('poker.game.play', {
-        url: '/:playerId/play',
+        url: '/:playerId/play/:topicId',
         views: {
           'body@poker': {
             template,
-            controller: 'PlayCtrl as Play'
+            controller: 'PlayCtrl as Play',
+            resolve: {
+              gameState: function(Game) {
+                return Game;
+            }
+            }
           }
         }
       });
